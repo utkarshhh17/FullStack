@@ -18,7 +18,7 @@ The React Authentication App is a full-stack web application built with React.js
 
 - **Signup Screen**: Allows users to register with a unique username, email, and password. Validates input fields and email format. Includes optional fields like name and profile picture. Requires acceptance of terms and conditions. Provides clear error and success messages. Simulates sending a welcome email notification upon successful signup. Redirects to the post list screen after signup.
 
-- **Post List Screen**: Implements infinite scrolling for browsing posts. Fetches posts data using paginated GET API endpoints. Responsive design using Tailwind CSS. Consistent with the "MelodyVerse" theme.
+- **Post List Screen**: Implements infinite scrolling for browsing posts. Fetches posts data using paginated GET API endpoints. Responsive design using Tailwind CSS. 
 
 ### API Endpoints
 
