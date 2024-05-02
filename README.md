@@ -25,4 +25,4 @@ To install and run the React Authentication App locally, follow these steps:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/react-authentication-app.git
+git clone https://github.com/utkarshhh17/FullStack.git
