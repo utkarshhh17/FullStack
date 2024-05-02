@@ -4,19 +4,32 @@
 
 The React Authentication App is a full-stack web application built with React.js, Node.js, Express.js, and MongoDB. It provides user authentication and authorization features, allowing users to sign up, log in, and access protected routes.
 
-### Features
 
-- **User Authentication**: Users can sign up with a valid email address and password, and log in to their accounts securely.
-- **Protected Routes**: Certain routes are protected and can only be accessed by authenticated users.
-- **Password Reset**: Users can request a password reset if they forget their password, and receive an email with instructions to reset it.
-- **Email Verification**: New users must verify their email addresses before gaining access to the application.
-- **Rate Limiting**: Rate limiting is implemented to protect against brute force attacks on login and password reset endpoints.
-- **Middleware for Authentication and Authorization**: Middleware functions are used to authenticate and authorize user requests.
-- **Unit Tests**: API endpoints are unit tested using Jest to ensure reliability and stability.
-- **Social Login**: Users can sign up or log in using social login options provided by mock APIs and React libraries.
-- **Password Visibility Toggle**: Users can toggle password visibility in the password input field for improved user experience.
-- **Animations with Framer Motion**: Framer Motion is used to add animations and microinteractions to enhance the user experience.
-- **Accessibility Features**: Alt text and keyboard navigation using ARIA attributes and focus management are included for improved accessibility.
+### Technology Stack
+
+- **Node.js and npm**: Server-side JavaScript runtime and package manager.
+- **Express.js**: Web application framework for Node.js used to build the backend server.
+- **MongoDB**: NoSQL database used to store user data and posts.
+- **jsonwebtoken**: Library for generating and validating JSON Web Tokens (JWT) for user authentication.
+- **React.js**: JavaScript library used for building user interfaces and components.
+
+
+## Features
+
+- **Signup Screen**: Allows users to register with a unique username, email, and password. Validates input fields and email format. Includes optional fields like name and profile picture. Requires acceptance of terms and conditions. Provides clear error and success messages. Simulates sending a welcome email notification upon successful signup. Redirects to the post list screen after signup.
+
+- **Post List Screen**: Implements infinite scrolling for browsing posts. Fetches posts data using paginated GET API endpoints. Responsive design using Tailwind CSS. Consistent with the "MelodyVerse" theme.
+
+### API Endpoints
+
+- **POST /signup**: Registers a new user with provided username, email, and password. Validates input, ensures unique usernames and emails, and securely hashes passwords. Returns a success message and JWT token upon successful registration.
+- **GET /posts**: Paginated implementation for fetching posts data from the database. Secure endpoint that rejects unauthorized requests.
+
+### JWT Implementation
+
+- Generates JWT tokens with appropriate payload and expiration time upon successful login.
+- Validates JWT tokens in protected routes to ensure user authentication.
+- Implements token refresh mechanisms for improved security.
 
 ## Installation
 
