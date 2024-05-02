@@ -38,5 +38,19 @@ const createToken = (_id) => {
       res.status(400).json({error: error.message})
     }
   }
+
+
+  const resetPassword = async (req, res) => {
+    const {email, password, newpassword} = req.body
   
-  module.exports = { signupUser, loginUser }
+    try {
+      const user = await User.resetPassword(email, password, newpassword)
+  
+  
+      res.status(200).json({email})
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  }
+  
+  module.exports = { signupUser, loginUser, resetPassword }

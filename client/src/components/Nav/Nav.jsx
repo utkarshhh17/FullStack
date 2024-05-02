@@ -9,35 +9,26 @@ export default function Nav(){
     // const [bgClass, setBgClass] = useState('');
     // const [showLinks, setShowLinks] = useState(false);
     const {user, dispatch}=useAuthContext()
-    const [hoverData, setHoverData]=useState('')
+    const [showMenu, setShowMenu]=useState(false)
     const navigate=useNavigate();
 
-    
     const handleClick=()=>{
+      setShowMenu(!showMenu)
+    }
+    const handleLogOut=()=>{
         localStorage.removeItem('user');
         dispatch({type:'LOGOUT'});
         navigate("/login")
 
     }
 
-    const handleHoverEnter=()=>{
-        setHoverData('Logout')
-    }
-    const handleHoverLeave=()=>{
-      setHoverData(user.username)
-  }
     
     
     // const toggleLinks = () => {
     //   setShowLinks(!showLinks);
     // };
 
-    useEffect(() => {
-        if(user){
-          setHoverData(user.username)
-        }
-        
-      }, []);
+  
     return(
         <div className={`flex justify-between text-white bg-[#2b2b2b] py-5 `}>
 
@@ -47,17 +38,20 @@ export default function Nav(){
             <div className="flex justify-between mr-[5vw] font-open-sans text-[1.3vw] font-bold small:hidden">
                
                 <div>
-                {!user && 
-                <Link to="/login">
-                <div className="relative bottom-1 hover:font-bold hover:scale-110 h-9 flex justify-center items-center cursor-pointer bg-[#0f056e] hover:bg-white hover:text-black px-4 rounded-lg hover:shadow-md">
-                    Sign In
-                </div>
-                </Link>
-                }
                 {user &&
-                <button onClick={handleClick} className="transition h-10 flex items-center justify-center cursor-pointer hover:font-bold text-xl
-               hover:bg-white px-2 duration-500 hover:shadow-md hover:text-black rounded-2xl" onMouseEnter={handleHoverEnter} onMouseLeave={handleHoverLeave}>
-                 {hoverData}</button>
+                <div className=''>
+                <button onClick={handleClick} className="transition h-10 flex items-center justify-center cursor-pointer hover:font-bold text-lg
+               hover:bg-white px-2 duration-500 hover:shadow-md hover:text-black rounded-2xl" >
+                 {user.username}</button>
+                 
+                 
+                 {showMenu && 
+                 <div className='flex absolute flex-col right-[4.9vw] bg-white text-black font-lato text-sm rounded-md shadow-xl'>
+                    <div className='border-b-gray-200 border-b-2 hover:bg-gray-300 cursor-pointer py-2 px-4'><Link to="/reset">Reset Pasword</Link></div>
+                    <div className='hover:bg-gray-300 cursor-pointer  py-2 px-4' onClick={handleLogOut}>Logout</div>
+                 </div>
+                 }
+                 </div>
                 }
                 </div>
             </div>

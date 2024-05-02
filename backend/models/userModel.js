@@ -68,5 +68,33 @@ userSchema.statics.signup = async function(email, password, username) {
   
     return user
   }
+
+  userSchema.statics.resetPassword = async function(email, password, newpassword) {
+  
+    if (!email || !password) {
+      throw Error('All fields must be filled')
+    }
+  
+    const user = await this.findOne({ email })
+    if (!user) {
+      throw Error('User Not Found')
+    }
+
+   
+  
+    const match = await bcrypt.compare(password, user.password)
+    if (!match) {
+      throw Error('Incorrect password')
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(newpassword, salt)
+
+    user.password = hash;
+    await user.save();
+
+  
+    return user
+  }
   
   module.exports = mongoose.model('User', userSchema)

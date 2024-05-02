@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { motion } from "framer-motion";
-
+import { ViewIcon } from "../../assets/ViewIcon";
 
 export default function Login(){
 
@@ -11,7 +11,7 @@ export default function Login(){
     const [error,setError]=useState(null);
     const navigate=useNavigate();
     const {user, dispatch}=useAuthContext()
-
+    const [showPassword, setShowPassword]= useState(false);
     const variants = {
         initial: {
           scale: 0.9,
@@ -49,14 +49,16 @@ export default function Login(){
             setError('Please fill in both email and password fields.');
             return;
         }
-        console.log("The data is : "+loginData.email);         
+        console.log("The data is : "+loginData.email);
+        setError('')         
         e.preventDefault();
            
         axios.post('http://localhost:8000/login', loginData)
         .then((response) => {               
-            setLoginData({email:'',password:''});
+            
             const json=response.data;
             if (response.status === 200) {
+                setLoginData({email:'',password:''});
                         
                 localStorage.setItem('user', JSON.stringify(json))                       
                 dispatch({type: 'LOGIN', payload: json})
@@ -91,7 +93,11 @@ export default function Login(){
             <div className="mt-3 text-red-500">{error}</div>}
             </>
             <input type='text' onChange={handleChange} value={loginData.email} name="email" placeholder="Enter Email" className={`w-[25rem] outline-none border-b-black border-b-[1px] ${marginTop}`}></input>
-            <input type='password' onChange={handleChange} value={loginData.password} name="password" placeholder='Enter Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
+            <div className="flex w-auto ml-[1vw]">
+                <input  type={showPassword ? 'text' : 'password'} onChange={handleChange} value={loginData.password} name="password" placeholder='Enter Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
+                <button className="mt-10 cursor-pointer relative right-5" onClick={()=>{setShowPassword(!showPassword)}}><ViewIcon /></button>
+            </div>
+            
             <div className="mt-5 font-roboto text-sm text-slate-700">New User? <Link to='/register' className="underline hover:text-black">Signup</Link></div>
             <button onClick={handleClick} className="bg-black text-white py-2 px-5 rounded-sm hover:scale-110 mt-8 font-jost" >Login</button>
         </motion.div>

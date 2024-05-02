@@ -3,7 +3,7 @@ const app = express();
 const mongoose=require('mongoose');
 const cors = require('cors');
 mongoose.set('strictQuery',false);
-const { loginUser, signupUser } = require('./controllers/userController')
+const { loginUser, signupUser, resetPassword } = require('./controllers/userController')
 
 
 
@@ -15,6 +15,7 @@ app.use(cors());
 
 app.post('/login',loginUser);
 app.post('/signup',signupUser);
+app.post('/reset',resetPassword);
 
 const start= async()=>{
     try{

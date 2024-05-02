@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { motion } from "framer-motion";
+import { ViewIcon } from "../../assets/ViewIcon";
+
 
 
 export default function Register(){
@@ -11,6 +13,9 @@ export default function Register(){
     const [error, setError]=useState(null);
     const { dispatch } = useAuthContext();
     const navigate=useNavigate();
+    const [showPassword, setShowPassword]= useState(false);
+    const [showConfirmPassword, setShowConfirmPassword]= useState(false);
+
 
     const handleChange=(e)=>{
         const {name,value}=e.target;
@@ -48,6 +53,7 @@ export default function Register(){
             return;
 
         }
+        setError('')
         console.log(signupData);         
         e.preventDefault();
 
@@ -55,9 +61,10 @@ export default function Register(){
            
         axios.post('http://localhost:8000/signup', sendData)
         .then((response) => {               
-            setSignupData({email:'',password:''});
+            
             const json=response.data;
             if (response.status === 200) {
+                setSignupData({email:'',password:''});
                         
                 localStorage.setItem('user', JSON.stringify(json))
         
@@ -93,8 +100,20 @@ export default function Register(){
             <div className="text-red-400 mt-3">{error}</div>}
             <input type='text' onChange={handleChange} value={signupData.email} name="email" placeholder="Enter Email" className={`w-[25rem] outline-none border-b-black border-b-[1px] ${marginTop}`}></input>
             <input type='text' onChange={handleChange} value={signupData.username} name="username" placeholder="Enter UserName" className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
-            <input type='password' onChange={handleChange} value={signupData.password} name="password" placeholder='Enter Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
-            <input type='password' onChange={handleChange} value={signupData.confirmpassword} name="confirmpassword" placeholder='Confirm Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
+           
+            <div className="flex ml-[1vw]">
+                <input type={showPassword ? 'text' : 'password'} onChange={handleChange} value={signupData.password} name="password" placeholder='Enter Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
+                <button className="mt-10 cursor-pointer relative right-5" onClick={()=>{setShowPassword(!showPassword)}}><ViewIcon /></button>
+
+            </div>
+
+            <div className="flex ml-[1vw]">
+                <input type={showConfirmPassword ? 'text' : 'password'} onChange={handleChange} value={signupData.confirmpassword} name="confirmpassword" placeholder='Confirm Password' className="w-[25rem] mt-10 outline-none border-b-black border-b-[1px]"></input>
+                <button className="mt-10 cursor-pointer relative right-5" onClick={()=>{setShowConfirmPassword(!showConfirmPassword)}}><ViewIcon /></button>
+
+            </div>
+            
+            
             <div className="mt-5 font-roboto text-sm text-slate-700">Already a User? <Link to='/' className="underline hover:text-black">Login</Link></div>
             <button onClick={handleClick} className="bg-black text-white py-2 px-5 rounded-sm hover:scale-110 mt-8 font-jost mb-8" >Register</button>
         </motion.div>
