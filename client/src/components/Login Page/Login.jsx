@@ -62,7 +62,7 @@ export default function Login(){
                         
                 localStorage.setItem('user', JSON.stringify(json))                       
                 dispatch({type: 'LOGIN', payload: json})
-                console.log(response.data.token);
+                // console.log(response.data.token);
                 navigate("/");
             }
             else{
@@ -81,6 +81,7 @@ export default function Login(){
         });
 
     };
+
     const marginTop=error==null?'mt-10':'mt-5';
 
     return(

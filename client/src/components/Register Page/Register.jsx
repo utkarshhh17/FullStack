@@ -70,7 +70,7 @@ export default function Register(){
         
                         
                 dispatch({type: 'LOGIN', payload: json})
-                console.log(response.data.token);
+                // console.log(response.data.token);
                 navigate("/");
             }
             else{
@@ -87,6 +87,8 @@ export default function Register(){
         });
 
     };
+
+  
     const marginTop=error==null?'mt-10':'mt-5';
 
    
