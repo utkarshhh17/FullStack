@@ -39,3 +39,46 @@ To install and run the React Authentication App locally, follow these steps:
 
 ```bash
 git clone https://github.com/utkarshhh17/FullStack.git
+```
+
+2. Navigate to the backend directory:
+
+```bash
+cd FullStack/backend
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Run the backend server:
+
+```bash
+node app.js
+```
+
+5. Open a new terminal window/tab.
+
+6. Navigate to the client directory:
+
+```bash
+cd FullStack/client
+```
+
+7. Install dependencies:
+
+```bash
+npm install
+```
+
+8.Start the React development server:
+
+```bash
+npm start
+```
+
+9. Open your web browser and go to http://localhost:3000 to view the FullStack App.
+
+
