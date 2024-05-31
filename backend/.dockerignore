@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+README*.md
+node_modules/
+LICENSE
+Dockerfile
+.dockerignore
+
+package-lock.json
