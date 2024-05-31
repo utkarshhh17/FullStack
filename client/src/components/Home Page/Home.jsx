@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios"
 import Nav from "../Nav/Nav";
 import LikeIcon from "./LikeIcon"
 export default function Home(){
-    const {user, dispatch}=useAuthContext()
+    const {user}=useAuthContext()
     const navigate=useNavigate();
 
     useEffect(() => {

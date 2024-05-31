@@ -62,7 +62,7 @@ export default function ResetPassword(){
         axios.post('http://localhost:8000/reset', sendData)
         .then((response) => {               
             
-            const json=response.data;
+            // const json=response.data;
             if (response.status === 200) {
                 setResetData({email:'',password:'', newpassword:'', newconfirmpassword:''});
                 
