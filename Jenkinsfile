@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Replace with your repository URL and branch
-                git url: 'https://your-repo-url.git', branch: 'main'
+                git url: 'https://github.com/utkarshhh17/FullStack.git', branch: 'main'
             }
         }
         stage('Verify Files') {
