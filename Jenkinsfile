@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        SONARQUBE_ENV = 'SonarQube'
+        SONAR_HOST_URL = 'http://localhost:9000'
+
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -16,6 +21,26 @@ pipeline {
                 bat 'if exist backend (echo Backend directory is present) else (echo Backend directory is missing && exit 1)'
                 // Verify client directory
                 bat 'if exist client (echo Client directory is present) else (echo Client directory is missing && exit 1)'
+            }
+        }
+        stage('SonarQube Analysis Backend') {
+            steps {
+                echo 'Running SonarQube analysis for backend'
+                withSonarQubeEnv('SonarQube') {
+                    dir('backend') {
+                        bat 'sonar-scanner -Dsonar.projectKey=backend -Dsonar.sources=. -Dsonar.host.url=${env.SONAR_HOST_URL}'
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis Client') {
+            steps {
+                echo 'Running SonarQube analysis for client'
+                withSonarQubeEnv('SonarQube') {
+                    dir('client') {
+                        bat 'sonar-scanner -Dsonar.projectKey=client -Dsonar.sources=. -Dsonar.host.url=${env.SONAR_HOST_URL}'
+                    }
+                }
             }
         }
         stage('Build Backend') {
